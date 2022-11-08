@@ -13,6 +13,8 @@ RUN groupadd -g 121 runner \
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+RUN apt-get update -y && \
+    apt-get install sudo -y
 
 WORKDIR /actions-runner
 
@@ -29,7 +31,7 @@ RUN chmod +x /token.sh /entrypoint.sh
 ENV RUNNER_SCOPE=org
 ENV ORG_NAME=zilliztech
 
-USER runner
+# USER runner
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["./run.sh"]
